@@ -111,86 +111,53 @@ void posicionar(Boat* boat, int nlinhas, int ncol, int** mat){
         else{
             //caso seja horizontal
             //verifica se está em alguma das bordas
-            if((boat->posY+i == 0 || boat->posY + i + 1 == ncol) || (boat->posX == 0 || boat->posX == nlinhas)){
+            if(boat->posX == 0 || boat->posX == nlinhas || boat->posY+i == 0 || boat->posY+i+1 == ncol){
                 //verifica em qual das bordas está e faz o posicionamento
                 //se esta encostado no lado esquerdo ou do lado direito
-                if(boat->posX+i == 0 || boat->posX+i + 1 == nlinhas){
-                    //para colocar o caracter de inicio ou fim
-                    if(i == 0){
-                        mat[boat->posX+i][boat->posY] = 3;
-                    }
-                    else if(i == boat->size-1){
-                        mat[boat->posX+i][boat->posY] = 4;
-                    }
-                    //se está encostado em cima
-                    if (boat->posY == 0){
-                        mat[boat->posX+i][boat->posY+1] = 2;
-                    }
-                    //se está encostado em baixo
-                    else if(boat->posY == ncol){
-                        mat[boat->posX+i][boat->posY-1] = 2;
-                    }
-                    //se não está encostado
-                    else{
-                        mat[boat->posX+i][boat->posY+1] = 2;
-                        mat[boat->posX+i][boat->posY-1] = 2;
-                    }
+                if(boat->posY+i == 0 || i == 0){
+                    mat[boat->posX][boat->posY] = 3;
+                                        
                 }
-                //se está encostado em cima
-                else if(boat->posY == 0){
-                    mat[boat->posX+i][boat->posY] = 1;
-                    mat[boat->posX+i][boat->posY+1] = 2;
-                    if(i == 0){
-                        //preenche a borda do comeco do barco e coloca o numero especial do fim
-                        mat[boat->posX+i][boat->posY] = 3;
-                        mat[boat->posX-1+i][boat->posY] = 2;
-                        mat[boat->posX-1+i][boat->posY+1] = 2;
-                    }
-                    else if(i == boat->size-1){
-                        //preenche a borda do fim do barco e coloca o numero especial do fim
-                        mat[boat->posX+i][boat->posY] = 4;
-                        mat[boat->posX+1+i][boat->posY] = 2;
-                        mat[boat->posX+1+i][boat->posY+1] = 2;
-                    }
+                else if(boat->posY+i == ncol-1 || i == boat->size-1){
+                    mat[boat->posX][boat->posY+i] = 4;
+                    
                 }
-                //se está encostado em baixo
-                else if(boat->posY == ncol){
-                    mat[boat->posX+i][boat->posY] = 1;
-                    mat[boat->posX+i][boat->posY-1] = 2;
-                    if(i == 0){
-                        //preenche a borda do comeco do barco e coloca o numero especial do fim
-                        mat[boat->posX+i][boat->posY] = 3;
-                        mat[boat->posX-1][boat->posY] = 2;
-                        mat[boat->posX-1][boat->posY-1] = 2;
-                    }
-                    else if(i == boat->size-1){
-                        //preenche a borda do fim do barco e coloca o numero especial do fim
-                        mat[boat->posX+i][boat->posY] = 4;
-                        mat[boat->posX+1+i][boat->posY] = 2;
-                        mat[boat->posX+1+i][boat->posY-1] = 2;
-                    }
+                else{
+                    mat[boat->posX][boat->posY+i] = 1;
                 }
+                if(boat->posX == 0){
+                    mat[boat->posX+1][boat->posY+i] = 2;
+                }
+                else if(boat->posX == nlinhas-1){
+                    mat[boat->posX-1][boat->posY+i] = 2;
+                }
+                else{
+                    mat[boat->posX-1][boat->posY+i] = 2;
+                    mat[boat->posX+1][boat->posY+i] = 2;
+                    
+                }
+                
             }
             else{
-                //preenchimento da posicao do barco e a borda imediata
                 mat[boat->posX][boat->posY+i] = 1;
-                mat[boat->posX+1][boat->posY+i] = 2;
                 mat[boat->posX-1][boat->posY+i] = 2;
+                mat[boat->posX+1][boat->posY+i] = 2;
                 if(i == 0)
                 {
                     //preenche a borda do comeco do barco e coloca o numero especial do fim
                     mat[boat->posX][boat->posY+i] = 3;
                     mat[boat->posX-1][boat->posY-1+i] = 2;
-                    mat[boat->posX-1][boat->posY+i] = 2;
-                    mat[boat->posX-1][boat->posY+i] = 2;
+                    mat[boat->posX][boat->posY-1+i] = 2;
+                    mat[boat->posX+1][boat->posY-1+i] = 2;
                 }
                 else if(i == boat->size-1){
                     //preenche a borda do fim do barco e coloca o numero especial do fim
                     mat[boat->posX][boat->posY+i] = 4;
-                    mat[boat->posX+1][boat->posY-1+i] = 2;
-                    mat[boat->posX+1][boat->posY+i] = 2;
-                    mat[boat->posX+1][boat->posY+i] = 2;
+                    mat[boat->posX-1][boat->posY+1+i] = 2;
+                    mat[boat->posX][boat->posY+1+i] = 2;
+                    mat[boat->posX+1][boat->posY+1+i] = 2;
                 }
+                
                 
             }
         }
@@ -227,8 +194,10 @@ int main(int, char **)
     //orient = orientação, onde 0 é vertical e 1 horizontal
     //se a orientação for vertical, posiciona da maneira a seguir
     if(bs1->orient == 0){
-        bs1->posX = rand() %(nlinhas);
-        bs1->posY = rand() %(ncol-3); 
+       // bs1->posX = rand() %(nlinhas);
+        //bs1->posY = rand() %(ncol-3);
+        bs1->posX = 0;
+        bs1->posY = 0; 
         cout << bs1->posX <<endl;
         cout << bs1->posY <<endl; //verificação
         posicionar(bs1, nlinhas, ncol, mat);
