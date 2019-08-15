@@ -115,11 +115,11 @@ void posicionar(Boat* boat, int nlinhas, int ncol, int** mat){
                 //verifica em qual das bordas está e faz o posicionamento
                 //se esta encostado no lado esquerdo ou do lado direito
                 if(boat->posY+i == 0 || i == 0){
-                    mat[boat->posX][boat->posY] = 3;
+                    mat[boat->posX][boat->posY] = 5;
                                         
                 }
                 else if(boat->posY+i == ncol-1 || i == boat->size-1){
-                    mat[boat->posX][boat->posY+i] = 4;
+                    mat[boat->posX][boat->posY+i] = 6;
                     
                 }
                 else{
@@ -145,14 +145,14 @@ void posicionar(Boat* boat, int nlinhas, int ncol, int** mat){
                 if(i == 0)
                 {
                     //preenche a borda do comeco do barco e coloca o numero especial do fim
-                    mat[boat->posX][boat->posY+i] = 3;
+                    mat[boat->posX][boat->posY+i] = 5;
                     mat[boat->posX-1][boat->posY-1+i] = 2;
                     mat[boat->posX][boat->posY-1+i] = 2;
                     mat[boat->posX+1][boat->posY-1+i] = 2;
                 }
                 else if(i == boat->size-1){
                     //preenche a borda do fim do barco e coloca o numero especial do fim
-                    mat[boat->posX][boat->posY+i] = 4;
+                    mat[boat->posX][boat->posY+i] = 6;
                     mat[boat->posX-1][boat->posY+1+i] = 2;
                     mat[boat->posX][boat->posY+1+i] = 2;
                     mat[boat->posX+1][boat->posY+1+i] = 2;
@@ -189,15 +189,15 @@ int main(int, char **)
     }
     //gerando a primeira peça
     // battleship
-    Boat* bs1 = new Boat(4, 0);
+    Boat* bs1 = new Boat(4, rand() % 2);
     cout << "orientação: "<< bs1->orient <<endl;
     //orient = orientação, onde 0 é vertical e 1 horizontal
     //se a orientação for vertical, posiciona da maneira a seguir
     if(bs1->orient == 0){
-       // bs1->posX = rand() %(nlinhas);
-        //bs1->posY = rand() %(ncol-3);
-        bs1->posX = 0;
-        bs1->posY = 0; 
+        bs1->posX = rand() %(nlinhas);
+        bs1->posY = rand() %(ncol-3);
+        //bs1->posX = 0;
+        //bs1->posY = 0; 
         cout << bs1->posX <<endl;
         cout << bs1->posY <<endl; //verificação
         posicionar(bs1, nlinhas, ncol, mat);
