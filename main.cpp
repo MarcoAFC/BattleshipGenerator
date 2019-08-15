@@ -111,25 +111,42 @@ void posicionar(Boat* boat, int nlinhas, int ncol, int** mat){
         else{
             //caso seja horizontal
             //verifica se está em alguma das bordas
-            if(boat->posX == 0 || boat->posX == nlinhas || boat->posY+i == 0 || boat->posY+i+1 == ncol){
+            if(boat->posX == 0 || boat->posX+1 == nlinhas || boat->posY+i == 0 || boat->posY+i+1 == ncol){
                 //verifica em qual das bordas está e faz o posicionamento
-                //se esta encostado no lado esquerdo ou do lado direito
+                //se esta encostado no lado esquerdo ou do lado direito 
                 if(boat->posY+i == 0 || i == 0){
                     mat[boat->posX][boat->posY] = 5;
-                                        
+                    if (boat->posX > 0){
+                        mat[boat->posX][boat->posY-1] = 2;
+                        mat[boat->posX-1][boat->posY-1] = 2;
+                    }
                 }
-                else if(boat->posY+i == ncol-1 || i == boat->size-1){
+                else if(boat->posY+i+1 == ncol || i == boat->size-1){
                     mat[boat->posX][boat->posY+i] = 6;
-                    
                 }
                 else{
                     mat[boat->posX][boat->posY+i] = 1;
                 }
                 if(boat->posX == 0){
                     mat[boat->posX+1][boat->posY+i] = 2;
+                    if(i == 0){
+                        mat[boat->posX][boat->posY-1] = 2;
+                        mat[boat->posX+1][boat->posY-1] = 2;
+                    }
+                    if(i+1 == boat->size){
+                        mat[boat->posX][boat->posY+i+1] = 2;
+                        mat[boat->posX+1][boat->posY+i+1] = 2;
+                    }
                 }
-                else if(boat->posX == nlinhas-1){
+                else if(boat->posX+1 == nlinhas){
                     mat[boat->posX-1][boat->posY+i] = 2;
+                    if (i+1 == boat->size && boat->posY+i < ncol)
+                    {
+                        
+                         mat[boat->posX-1][boat->posY+i+1] = 2;
+                         mat[boat->posX][boat->posY+i+1] = 2;
+                    }
+                    
                 }
                 else{
                     mat[boat->posX-1][boat->posY+i] = 2;
@@ -189,15 +206,13 @@ int main(int, char **)
     }
     //gerando a primeira peça
     // battleship
-    Boat* bs1 = new Boat(4, rand() % 2);
+    Boat* bs1 = new Boat(4, rand()%2);
     cout << "orientação: "<< bs1->orient <<endl;
     //orient = orientação, onde 0 é vertical e 1 horizontal
     //se a orientação for vertical, posiciona da maneira a seguir
     if(bs1->orient == 0){
         bs1->posX = rand() %(nlinhas);
         bs1->posY = rand() %(ncol-3);
-        //bs1->posX = 0;
-        //bs1->posY = 0; 
         cout << bs1->posX <<endl;
         cout << bs1->posY <<endl; //verificação
         posicionar(bs1, nlinhas, ncol, mat);
@@ -212,20 +227,21 @@ int main(int, char **)
         posicionar(bs1, nlinhas, ncol, mat);
     }
 
-       for(int i = 0;i < nlinhas; ++i)
+    for(int i = 0;i < nlinhas; ++i)
+    {
+    for(int j = 0;j < ncol; ++j)
         {
-        for(int j = 0;j < ncol; ++j)
-          {
-             cout << mat[i][j]<<" ";
-          }
-        cout << "\n";
+            cout << mat[i][j]<<" ";
+        }
+    cout << "\n";
         }
     //liberar memória
    /* for(int i = 0;i < nlinhas; ++i)
         delete []mat[i];
  
-    delete []mat; */    
+    delete []mat; */
     delete bs1;
+        
     return 0;
 }
 
