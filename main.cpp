@@ -3,6 +3,16 @@
 
 using namespace std;
 
+class Subm{
+    public:
+    int posX = -1;
+    int posY = -1;
+};
+
+void posicionarsub (Subm* subm, int nlinhas, int ncol, int** mat){
+    mat[subm->posX][subm->posY] = 7;
+}
+
 class Boat{
     //Classe que armazena os parâmetros dos barcos para criar menos variáveis
     public:
@@ -17,8 +27,10 @@ class Boat{
     }
 };
 
+
 //Coloca o barco na tabela, recebendo o tamanho e o local para colocar
 void posicionar(Boat* boat, int nlinhas, int ncol, int** mat){
+    cout<<"Boat: "<<boat->posX<<", "<<boat->posY<<endl;
     for(size_t i = 0; i < boat->size; i++)
     {   
         //verifica a orientação do barco para encontrar a forma de fazer o preenchimento
@@ -173,15 +185,56 @@ void posicionar(Boat* boat, int nlinhas, int ncol, int** mat){
                     mat[boat->posX-1][boat->posY+1+i] = 2;
                     mat[boat->posX][boat->posY+1+i] = 2;
                     mat[boat->posX+1][boat->posY+1+i] = 2;
-                }
-                
-                
+                }   
             }
         }
     }
     
 }
+void encontrarPosicao(Boat* boat, int nlinhas, int ncol, int** mat){
+    srand((unsigned int)time(NULL));
 
+    bool valido = false;
+    while(valido == false){
+        if(boat->orient == 1){
+            boat->posX = rand() %(nlinhas-(boat->size-1));
+            boat->posY = rand() %ncol;
+            for(int i = 0; i < boat->size; ++i){
+                if(mat[boat->posX+i][boat->posY] == 0){
+                    valido = true;
+                }
+                else{
+                    valido = false;
+                    break;
+                }
+            }
+        }
+        else if(boat->orient == 0){
+            boat->posX = rand() %nlinhas;
+            boat->posY = rand() %(ncol-(boat->size-1));
+            for(int i = 0; i < boat->size; ++i){
+                if(mat[boat->posX][boat->posY+i] == 0){
+                    valido = true;
+                }
+                else{
+                    valido = false;
+                    break;
+                }
+            }
+        }
+        else{
+            boat->posX = rand() %nlinhas;
+            boat->posY = rand() %ncol;
+            if(mat[boat->posX][boat->posY] == 0){
+                valido = true;
+            }
+
+        }
+    }
+    if(valido == true){
+        posicionar(boat, nlinhas, ncol, mat);
+    }
+}
 int main(int, char **)
 {
     srand((unsigned int)time(NULL));
@@ -193,7 +246,7 @@ int main(int, char **)
 
     int **mat = new int*[nlinhas];
  
-    for(int i = 0;i < nlinhas; ++i)
+    for(int i = 0; i < nlinhas; ++i)
         mat[i] = new int[ncol];
  
     //iniciando ela com zero
@@ -206,26 +259,27 @@ int main(int, char **)
     }
     //gerando a primeira peça
     // battleship
-    Boat* bs1 = new Boat(4, rand()%2);
-    cout << "orientação: "<< bs1->orient <<endl;
+    Boat* bs1 = new Boat(4, rand() % 2);
+    encontrarPosicao(bs1, nlinhas, ncol, mat);
+    Boat* ds1 = new Boat(3, rand() % 2);
+    encontrarPosicao(ds1, nlinhas, ncol, mat);
+    Boat* ds2 = new Boat(3, rand() % 2);
+    encontrarPosicao(ds2, nlinhas, ncol, mat);
+    Boat* cs1 = new Boat(2, rand() % 2);
+    encontrarPosicao(cs1, nlinhas, ncol, mat);
+    Boat* cs2 = new Boat(2, rand() % 2);
+    encontrarPosicao(cs2, nlinhas, ncol, mat);
+    Boat* cs3 = new Boat(2, rand() % 2);
+    encontrarPosicao(cs3, nlinhas, ncol, mat);
+    Boat* sb1 = new Boat(1, -1);
+    encontrarPosicao(sb1, nlinhas, ncol, mat);
+    Subm* sb2 = new Subm();
+    Subm* sb3 = new Subm();
+    Subm* sb4 = new Subm();
+
     //orient = orientação, onde 0 é vertical e 1 horizontal
     //se a orientação for vertical, posiciona da maneira a seguir
-    if(bs1->orient == 0){
-        bs1->posX = rand() %(nlinhas);
-        bs1->posY = rand() %(ncol-3);
-        cout << bs1->posX <<endl;
-        cout << bs1->posY <<endl; //verificação
-        posicionar(bs1, nlinhas, ncol, mat);
-        
-    }
-    //se a orientação for horizontal, posiciona da maneira a seguir
-    if(bs1->orient == 1){
-        bs1->posX = rand() %(nlinhas-3);
-        bs1->posY = rand() %(ncol); 
-        cout << bs1->posX <<endl;
-        cout << bs1->posY <<endl; //verificação
-        posicionar(bs1, nlinhas, ncol, mat);
-    }
+    
 
     for(int i = 0;i < nlinhas; ++i)
     {
@@ -234,16 +288,27 @@ int main(int, char **)
             cout << mat[i][j]<<" ";
         }
     cout << "\n";
-        }
-    //liberar memória
-   /* for(int i = 0;i < nlinhas; ++i)
-        delete []mat[i];
- 
-    delete []mat; */
+    }
+//liberar memória
+    cout<<"ok\n";
+    for(int i = 0; i < nlinhas; i++){
+        delete[] mat[i];
+    }
+    delete [][]mat;
+    
     delete bs1;
-        
+    delete ds1;
+    delete ds2;
+    delete cs1;
+    delete cs2;
+    delete cs3;
+    delete sb1;
+    delete sb2;
+    delete sb3;
+    delete sb4;  
     return 0;
 }
+
 
 //Até agora, feito a criação dinâmica de matrizes, com entrada de dados pelo usuário.
 //(mudar para a entrada proposta pelo trabalho)
