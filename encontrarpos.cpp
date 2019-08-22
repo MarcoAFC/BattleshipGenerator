@@ -8,10 +8,11 @@
      * \param Y dimension size of the matrix.
      * \param The matrix.
      */
-void encontrarPosSub(Subm* sub, int nlinhas, int ncol, vector<vector<int>> &mat){
+void encontrarPosSub(Subm* sub, int nlinhas, int ncol, vector<vector<int>> &mat, bool &tabValido){
     srand((unsigned int)time(NULL));
     bool valido = false;
-    while(valido == false){
+    int count = 0;
+    while(valido == false && count < 50000 && tabValido == true){
         sub->posX = rand() %((nlinhas)-1);
         sub->posX++;
         sub->posY = rand() %((ncol)-1);
@@ -20,6 +21,10 @@ void encontrarPosSub(Subm* sub, int nlinhas, int ncol, vector<vector<int>> &mat)
             valido = true;
             posicionarsub(sub, nlinhas, ncol, mat);
         }
+        count++;
+    }
+    if (valido == false){
+        tabValido = false;
     }
 }
 
@@ -32,10 +37,11 @@ void encontrarPosSub(Subm* sub, int nlinhas, int ncol, vector<vector<int>> &mat)
      * \param The matrix.
      */
 
-void encontrarPosicao(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &mat){
+void encontrarPosicao(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &mat, bool &tabValido){
     srand((unsigned int)time(NULL));
     bool valido = false;
-    while(valido == false){
+    int count = 0;
+    while(valido == false && count < 50000 && tabValido == true){
         if(boat->orient == 1){
             boat->posX = rand() %((nlinhas)-(boat->size-1));
             boat->posX++;
@@ -73,8 +79,12 @@ void encontrarPosicao(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &ma
                 valido = true;
             }
         }
+        count++;
     }
     if(valido == true){
         posicionar(boat, nlinhas, ncol, mat);
+    }
+    else{
+        tabValido = false;
     }
 }

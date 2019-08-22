@@ -4,7 +4,6 @@ using namespace std;
 
     /*!
      * Fills the matrix in the spot deemed as suitable for the submarine and fills the surrounding area to identify it as unsuitable.
-     * Calls the printsub() function to fill the armada file.
      * \param Pointer to the submarine being placed.
      * \param X dimension size of the matrix.
      * \param Y dimension size of the matrix.
@@ -12,7 +11,6 @@ using namespace std;
      */
 
 void posicionarsub (Subm* subm, int nlinhas, int ncol, vector<vector<int>> &mat){
-    printSub(*subm);
     mat[subm->posX][subm->posY] = 7;
     mat[subm->posX-1][subm->posY+1] = 2;
     mat[subm->posX-1][subm->posY] = 2;
@@ -27,7 +25,6 @@ void posicionarsub (Subm* subm, int nlinhas, int ncol, vector<vector<int>> &mat)
 
     /*!
      * Fills the matrix in the spot deemed as suitable for the boat according to its size and fills the surrounding area to identify it as unsuitable.
-     * Calls the printArmada() function to fill the armada file.
      * \param Pointer to the boat being placed.
      * \param X dimension size of the matrix.
      * \param Y dimension size of the matrix.
@@ -35,7 +32,6 @@ void posicionarsub (Subm* subm, int nlinhas, int ncol, vector<vector<int>> &mat)
      */
 
 void posicionar(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &mat){
-    printArmada(*boat);
     for(size_t i = 0; i < boat->size; i++)
     {   
         //verifica a orientação do barco para encontrar a forma de fazer o preenchimento
