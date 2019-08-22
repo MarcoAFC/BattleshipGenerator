@@ -3,6 +3,14 @@
 #include <fstream>
 #include <sstream>
 using namespace std;
+
+    /*!
+     * Increments the starting index of the matrix.txt file by 1,
+     * proceeds to print the table in matrix form on the file.
+     * \param The matrix.
+     * \param X dimension size of the matrix.
+     * \param Y dimension size of the matrix.
+     */
 void printMatrix(vector<vector<int>> mat, int nlinhas, int ncol){
     //lê a primeira linha, pega o índice atual e fecha o arquivo
     ifstream fileIn;
@@ -85,6 +93,12 @@ void printMatrix(vector<vector<int>> mat, int nlinhas, int ncol){
     file.close();
 }
 
+    /*!
+    * If the first boat is being placed, increments the starting index of the matrix.txt file by 1,
+    * otherwise, ignores this step and proceeds to print the boat in the armada.txt file, according to its type and position.
+    * \param The boat object being printed.
+    */
+
 void printArmada(Boat boat){
     if (boat.size == 4){
         ifstream fileIn;
@@ -129,6 +143,11 @@ void printArmada(Boat boat){
     }
     file.close();
 }
+
+    /*!
+    * Prints the current submarine in the armada.txt file, according to its position.
+    * \param The submarine object being printed.
+    */
 
 void printSub(Subm sub){
     ofstream file("armada.txt", ios::app);

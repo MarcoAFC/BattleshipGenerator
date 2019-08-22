@@ -1,7 +1,16 @@
 #include "posicionar.h"
 #include "print.h"
 using namespace std;
-//Coloca o barco na tabela, recebendo o tamanho e o local para colocar
+
+    /*!
+     * Fills the matrix in the spot deemed as suitable for the submarine and fills the surrounding area to identify it as unsuitable.
+     * Calls the printsub() function to fill the armada file.
+     * \param Pointer to the submarine being placed.
+     * \param X dimension size of the matrix.
+     * \param Y dimension size of the matrix.
+     * \param The matrix.
+     */
+
 void posicionarsub (Subm* subm, int nlinhas, int ncol, vector<vector<int>> &mat){
     printSub(*subm);
     mat[subm->posX][subm->posY] = 7;
@@ -15,6 +24,16 @@ void posicionarsub (Subm* subm, int nlinhas, int ncol, vector<vector<int>> &mat)
     mat[subm->posX][subm->posY+1] = 2;
     
 }
+
+    /*!
+     * Fills the matrix in the spot deemed as suitable for the boat according to its size and fills the surrounding area to identify it as unsuitable.
+     * Calls the printArmada() function to fill the armada file.
+     * \param Pointer to the boat being placed.
+     * \param X dimension size of the matrix.
+     * \param Y dimension size of the matrix.
+     * \param The matrix.
+     */
+
 void posicionar(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &mat){
     printArmada(*boat);
     for(size_t i = 0; i < boat->size; i++)
