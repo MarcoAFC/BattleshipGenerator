@@ -62,7 +62,6 @@ int main(int, char **)
             printSub(*sb4);
         }
         else{
-            cout<<"INVALIDO\n";
             numTab++;
         }
     //liberar memória
