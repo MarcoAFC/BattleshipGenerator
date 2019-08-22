@@ -4,8 +4,19 @@
 #include "posicionar.h"
 using namespace std;
 
-void posicionarsub (Subm* subm, int nlinhas, int ncol, vector<vector<int>> &mat){
-    mat[subm->posX][subm->posY] = 7;
+void encontrarPosSub(Subm* sub, int nlinhas, int ncol, vector<vector<int>> &mat){
+    srand((unsigned int)time(NULL));
+    bool valido = false;
+    while(valido == false){
+        sub->posX = rand() %((nlinhas)-1);
+        sub->posX++;
+        sub->posY = rand() %((ncol)-1);
+        sub->posY++;
+        if(mat.at(sub->posX).at(sub->posY) == 0){
+            valido = true;
+            posicionarsub(sub, nlinhas, ncol, mat);
+        }
+    }
 }
 
 void encontrarPosicao(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &mat){
@@ -13,8 +24,10 @@ void encontrarPosicao(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &ma
     bool valido = false;
     while(valido == false){
         if(boat->orient == 1){
-            boat->posX = rand() %(nlinhas-(boat->size-1));
-            boat->posY = rand() %ncol;
+            boat->posX = rand() %((nlinhas)-(boat->size-1));
+            boat->posX++;
+            boat->posY = rand() %((ncol));
+            boat->posY++;
             for(int i = 0; i < boat->size; ++i){
                 if(mat[boat->posX+i][boat->posY] == 0){
                     valido = true;
@@ -27,7 +40,9 @@ void encontrarPosicao(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &ma
         }
         else if(boat->orient == 0){
             boat->posX = rand() %nlinhas;
+            boat->posX++;
             boat->posY = rand() %(ncol-(boat->size-1));
+            boat->posY++;
             for(int i = 0; i < boat->size; ++i){
                 if(mat[boat->posX][boat->posY+i] == 0){
                     valido = true;
@@ -59,7 +74,7 @@ int main(int, char **)
     cin >> nlinhas;
     cin >> ncol;
     vector<vector<int>> mat;
-    mat.resize(nlinhas, vector<int>(ncol));
+    mat.resize(nlinhas+2, vector<int>(ncol+2));
     //iniciando ela com zero
     for(int i = 0;i < nlinhas; ++i)
     {
@@ -83,17 +98,21 @@ int main(int, char **)
     Boat* cs3 = new Boat(2, rand() % 2);
     encontrarPosicao(cs3, nlinhas, ncol, mat);
     Subm* sb1 = new Subm();
+    encontrarPosSub(sb1, nlinhas, ncol, mat);
     Subm* sb2 = new Subm();
+    encontrarPosSub(sb2, nlinhas, ncol, mat);
     Subm* sb3 = new Subm();
+    encontrarPosSub(sb3, nlinhas, ncol, mat);
     Subm* sb4 = new Subm();
+    encontrarPosSub(sb4, nlinhas, ncol, mat);
 
     //orient = orientação, onde 0 é vertical e 1 horizontal
     //se a orientação for vertical, posiciona da maneira a seguir
     
 
-    for(int i = 0;i < nlinhas; ++i)
+    for(int i = 1;i <= nlinhas; ++i)
     {
-    for(int j = 0;j < ncol; ++j)
+    for(int j = 1;j <= ncol; ++j)
         {
             cout << mat[i][j]<<" ";
         }
