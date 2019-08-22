@@ -1,70 +1,8 @@
-#include <iostream> 
-#include <stdlib.h>
-#include <vector>
 #include "posicionar.h"
+#include "encontrarpos.h"
+#include "print.h"
 using namespace std;
 
-void encontrarPosSub(Subm* sub, int nlinhas, int ncol, vector<vector<int>> &mat){
-    srand((unsigned int)time(NULL));
-    bool valido = false;
-    while(valido == false){
-        sub->posX = rand() %((nlinhas)-1);
-        sub->posX++;
-        sub->posY = rand() %((ncol)-1);
-        sub->posY++;
-        if(mat.at(sub->posX).at(sub->posY) == 0){
-            valido = true;
-            posicionarsub(sub, nlinhas, ncol, mat);
-        }
-    }
-}
-
-void encontrarPosicao(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &mat){
-    srand((unsigned int)time(NULL));
-    bool valido = false;
-    while(valido == false){
-        if(boat->orient == 1){
-            boat->posX = rand() %((nlinhas)-(boat->size-1));
-            boat->posX++;
-            boat->posY = rand() %((ncol));
-            boat->posY++;
-            for(int i = 0; i < boat->size; ++i){
-                if(mat[boat->posX+i][boat->posY] == 0){
-                    valido = true;
-                }
-                else{
-                    valido = false;
-                    break;
-                }
-            }
-        }
-        else if(boat->orient == 0){
-            boat->posX = rand() %nlinhas;
-            boat->posX++;
-            boat->posY = rand() %(ncol-(boat->size-1));
-            boat->posY++;
-            for(int i = 0; i < boat->size; ++i){
-                if(mat[boat->posX][boat->posY+i] == 0){
-                    valido = true;
-                }
-                else{
-                    valido = false;
-                    break;
-                }
-            }
-        }
-        else{
-            boat->posX = rand() %nlinhas;
-            boat->posY = rand() %ncol;
-            if(mat[boat->posX][boat->posY] == 0){
-                valido = true;
-            }
-        }
-    }
-    if(valido == true){
-        posicionar(boat, nlinhas, ncol, mat);
-    }
-}
 int main(int, char **)
 {
     srand((unsigned int)time(NULL));
@@ -110,14 +48,14 @@ int main(int, char **)
     //se a orientação for vertical, posiciona da maneira a seguir
     
 
-    for(int i = 1;i <= nlinhas; ++i)
-    {
-    for(int j = 1;j <= ncol; ++j)
+    for(int i = 1;i <= nlinhas; ++i){
+        for(int j = 1;j <= ncol; ++j)
         {
             cout << mat[i][j]<<" ";
         }
     cout << "\n";
     }
+    printMatrix(mat, nlinhas, ncol);
 //liberar memória
     delete bs1;
     delete ds1;

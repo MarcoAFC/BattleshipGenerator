@@ -1,3 +1,4 @@
+#pragma once
 class Boat{
     public:
     int size;

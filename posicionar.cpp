@@ -25,14 +25,14 @@ void posicionar(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &mat){
             mat.at(boat->posX+i).at(boat->posY-1) = 2;
             mat.at(boat->posX+i).at(boat->posY+1) = 2;
             if(i == 0){
-                mat.at(boat->posX).at(boat->posY) = 3;
+                mat.at(boat->posX).at(boat->posY) = 5;
                 mat.at(boat->posX-1).at(boat->posY-1) = 2;
                 mat.at(boat->posX-1).at(boat->posY) = 2;
                 mat.at(boat->posX-1).at(boat->posY+1) = 2;
             }
             else if(i == boat->size-1)
             {
-                mat.at(boat->posX+i).at(boat->posY) = 4;
+                mat.at(boat->posX+i).at(boat->posY) = 6;
                 mat.at(boat->posX+1+i).at(boat->posY) = 2;
                 mat.at(boat->posX+1+i).at(boat->posY-1) = 2;
                 mat.at(boat->posX+1+i).at(boat->posY+1) = 2;
