@@ -14,13 +14,13 @@ void printMatrix(vector<vector<int>> mat, int nlinhas, int ncol){
     pegaIndice >> indice;
     //fecha o arquivo de entrada
 
-    //abre o arquivo para saída no modo de sobreescrever
-    ofstream overwrite;
     string content = "";
     for (int i = 0; fileIn.eof() != true; i++){
         content += fileIn.get();
     }
-    content.erase(content.end()-1);  
+    //abre o arquivo para saída no modo de sobreescrever
+    content.erase(content.end()-1);
+    ofstream overwrite;  
     overwrite.open("matrix.txt");
     overwrite<<indice+1<<endl;
     overwrite<<content;
@@ -82,5 +82,56 @@ void printMatrix(vector<vector<int>> mat, int nlinhas, int ncol){
     file<<endl;
     }
     file<<endl;
+    file.close();
+}
+
+void printArmada(Boat boat){
+    if (boat.size == 4){
+        ifstream fileIn;
+        fileIn.open("armada.txt");
+        string linha;
+        getline(fileIn, linha);
+        stringstream pegaIndice(linha);
+        int indice = 0;
+        pegaIndice >> indice;
+        //fecha o arquivo de entrada
+
+        string content = "";
+        for (int i = 0; fileIn.eof() != true; i++){
+            content += fileIn.get();
+        }
+        //abre o arquivo para saída no modo de sobreescrever
+        content.erase(content.end()-1);
+        ofstream overwrite;  
+        overwrite.open("armada.txt");
+        overwrite<<indice+1<<endl<<endl;
+        overwrite<<content<<endl<<endl;
+        //fecha a sobreescrita
+        overwrite.close();
+        fileIn.close();
+        }
+    ofstream file("armada.txt", ios::app);
+    if(boat.size == 4){
+        file<<"B ";
+    }
+    else if(boat.size == 3){
+        file<<"D ";
+    }
+    else if(boat.size == 2){
+        file<<"C ";
+    }
+    file<<boat.posX<<" "<<boat.posY<<" ";
+    if(boat.orient == 1){
+        file<<"V"<<endl;
+    }
+    else{
+        file<<"H"<<endl;
+    }
+    file.close();
+}
+
+void printSub(Subm sub){
+    ofstream file("armada.txt", ios::app);
+    file<<"S "<<sub.posX<<" "<<sub.posY<<endl;
     file.close();
 }

@@ -1,8 +1,9 @@
 #include "posicionar.h"
+#include "print.h"
 using namespace std;
 //Coloca o barco na tabela, recebendo o tamanho e o local para colocar
 void posicionarsub (Subm* subm, int nlinhas, int ncol, vector<vector<int>> &mat){
-    cout<<"Sub: "<<subm->posX<<", "<<subm->posY<<endl;
+    printSub(*subm);
     mat[subm->posX][subm->posY] = 7;
     mat[subm->posX-1][subm->posY+1] = 2;
     mat[subm->posX-1][subm->posY] = 2;
@@ -15,7 +16,7 @@ void posicionarsub (Subm* subm, int nlinhas, int ncol, vector<vector<int>> &mat)
     
 }
 void posicionar(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &mat){
-    cout<<"Boat: "<<boat->posX<<", "<<boat->posY<<", "<< boat->orient<<endl;
+    printArmada(*boat);
     for(size_t i = 0; i < boat->size; i++)
     {   
         //verifica a orientação do barco para encontrar a forma de fazer o preenchimento
