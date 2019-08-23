@@ -19,9 +19,9 @@ int main(int, char **)
     mat.resize(nlinhas+2, vector<int>(ncol+2));
     while(numTab > 0){
         //iniciando ela com zero
-        for(int i = 0;i < nlinhas; ++i)
+        for(int i = 0;i <= nlinhas; ++i)
         {
-            for(int j = 0;j < ncol; ++j)
+            for(int j = 0;j <= ncol; ++j)
             {
                 mat[i][j] = 0;
             }
