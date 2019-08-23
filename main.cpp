@@ -1,11 +1,12 @@
 #include "posicionar.h"
 #include "encontrarpos.h"
 #include "print.h"
+#include "rdtsc.h"
+
 using namespace std;
 
 int main(int, char **)
 {
-    srand((unsigned int)time(NULL));
     int nlinhas = 0; 
     int ncol = 0;
     cout << "Digite o numero de linhas e colunas respectivamente: ";
@@ -28,17 +29,17 @@ int main(int, char **)
         bool tabValido = true;
         //gerando a primeira peça
         // battleship
-        Boat* bs1 = new Boat(4, rand() % 2);
+        Boat* bs1 = new Boat(4, randomGen(0,1));
         encontrarPosicao(bs1, nlinhas, ncol, mat, tabValido);
-        Boat* ds1 = new Boat(3, rand() % 2);
+        Boat* ds1 = new Boat(3, randomGen(0,1));
         encontrarPosicao(ds1, nlinhas, ncol, mat, tabValido);
-        Boat* ds2 = new Boat(3, rand() % 2);
+        Boat* ds2 = new Boat(3, randomGen(0,1));
         encontrarPosicao(ds2, nlinhas, ncol, mat, tabValido);
-        Boat* cs1 = new Boat(2, rand() % 2);
+        Boat* cs1 = new Boat(2, randomGen(0,1));
         encontrarPosicao(cs1, nlinhas, ncol, mat, tabValido);
-        Boat* cs2 = new Boat(2, rand() % 2);
+        Boat* cs2 = new Boat(2, randomGen(0,1));
         encontrarPosicao(cs2, nlinhas, ncol, mat, tabValido);
-        Boat* cs3 = new Boat(2, rand() % 2);
+        Boat* cs3 = new Boat(2, randomGen(0,1));
         encontrarPosicao(cs3, nlinhas, ncol, mat, tabValido);
         Subm* sb1 = new Subm();
         encontrarPosSub(sb1, nlinhas, ncol, mat, tabValido);

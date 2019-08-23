@@ -13,9 +13,9 @@ void encontrarPosSub(Subm* sub, int nlinhas, int ncol, vector<vector<int>> &mat,
     bool valido = false;
     int count = 0;
     while(valido == false && count < 50000 && tabValido == true){
-        sub->posX = rand() %((nlinhas)-1);
+        sub->posX = randomGen(0, nlinhas-1);
         sub->posX++;
-        sub->posY = rand() %((ncol)-1);
+        sub->posY = randomGen(0, ncol-1);
         sub->posY++;
         if(mat.at(sub->posX).at(sub->posY) == 0){
             valido = true;
@@ -43,9 +43,9 @@ void encontrarPosicao(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &ma
     int count = 0;
     while(valido == false && count < 50000 && tabValido == true){
         if(boat->orient == 1){
-            boat->posX = rand() %((nlinhas)-(boat->size-1));
+            boat->posX = randomGen(0, nlinhas-(boat->size));
             boat->posX++;
-            boat->posY = rand() %((ncol));
+            boat->posY = randomGen(0, ncol-1);
             boat->posY++;
             for(int i = 0; i < boat->size; ++i){
                 if(mat[boat->posX+i][boat->posY] == 0){
@@ -58,9 +58,9 @@ void encontrarPosicao(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &ma
             }
         }
         else if(boat->orient == 0){
-            boat->posX = rand() %nlinhas;
+            boat->posX = randomGen(0, nlinhas-1);
             boat->posX++;
-            boat->posY = rand() %(ncol-(boat->size-1));
+            boat->posY = randomGen(0, ncol - boat->size);
             boat->posY++;
             for(int i = 0; i < boat->size; ++i){
                 if(mat[boat->posX][boat->posY+i] == 0){
@@ -70,13 +70,6 @@ void encontrarPosicao(Boat* boat, int nlinhas, int ncol, vector<vector<int>> &ma
                     valido = false;
                     break;
                 }
-            }
-        }
-        else{
-            boat->posX = rand() %nlinhas;
-            boat->posY = rand() %ncol;
-            if(mat[boat->posX][boat->posY] == 0){
-                valido = true;
             }
         }
         count++;

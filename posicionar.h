@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <stdlib.h>
+#include <random>
 #include <vector>
 #include "boats.h"
 using namespace std;
