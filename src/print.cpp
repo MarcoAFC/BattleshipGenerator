@@ -43,14 +43,14 @@ void printMatrix(vector<vector<int>> mat, int nlinhas, int ncol){
         for (int i = 0; i < 22; i++){
             file<<" ";
         }
-        for (int i = 0; i < nlinhas-9; i++)
+        for (int i = 0; i < ncol-9; i++)
         {
             file<<"1 ";
         }
         file<<endl;
     }
     file<<"    ";
-    for(int i = 0; i < nlinhas; i++){
+    for(int i = 0; i < ncol; i++){
         file<<(i+1)%10<<" ";
     }
     file<<"\n";
