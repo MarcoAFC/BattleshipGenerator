@@ -1,4 +1,4 @@
-#include "print.h"
+#include "../include/print.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -14,7 +14,7 @@ using namespace std;
 void printMatrix(vector<vector<int>> mat, int nlinhas, int ncol){
     //lê a primeira linha, pega o índice atual e fecha o arquivo
     ifstream fileIn;
-    fileIn.open("matrix.txt");
+    fileIn.open("output/matrix.txt");
     string linha;
     getline(fileIn, linha);
     stringstream pegaIndice(linha);
@@ -29,14 +29,14 @@ void printMatrix(vector<vector<int>> mat, int nlinhas, int ncol){
     //abre o arquivo para saída no modo de sobreescrever
     content.erase(content.end()-1);
     ofstream overwrite;  
-    overwrite.open("matrix.txt");
+    overwrite.open("output/matrix.txt");
     overwrite<<indice+1<<endl;
     overwrite<<content;
     //fecha a sobreescrita
     overwrite.close();
     fileIn.close();
     //abre novamente, colocando a saída no final do arquivo
-    ofstream file("matrix.txt", ofstream::app);
+    ofstream file("output/matrix.txt", ofstream::app);
     file<<nlinhas<<" "<<ncol<<endl;
     //imprimir o cabeçalho adequado
     if(nlinhas >= 10){
@@ -89,7 +89,7 @@ void printMatrix(vector<vector<int>> mat, int nlinhas, int ncol){
         }
     file<<endl;
     }
-    file<<endl;
+    file<<endl<<endl;
     file.close();
 }
 
@@ -102,7 +102,7 @@ void printMatrix(vector<vector<int>> mat, int nlinhas, int ncol){
 void printArmada(Boat boat){
     if (boat.size == 4){
         ifstream fileIn;
-        fileIn.open("armada.txt");
+        fileIn.open("output/armada.txt");
         string linha;
         getline(fileIn, linha);
         stringstream pegaIndice(linha);
@@ -117,15 +117,17 @@ void printArmada(Boat boat){
         //abre o arquivo para saída no modo de sobreescrever
         content.erase(content.end()-1);
         ofstream overwrite;  
-        overwrite.open("armada.txt");
-        overwrite<<indice+1<<endl<<endl;
-        overwrite<<content<<endl<<endl;
+        overwrite.open("output/armada.txt");
+        overwrite<<indice+1<<endl;
+        overwrite<<content;
         //fecha a sobreescrita
         overwrite.close();
         fileIn.close();
         }
-    ofstream file("armada.txt", ios::app);
+    ofstream file("output/armada.txt", ios::app);
+
     if(boat.size == 4){
+        file<<endl;
         file<<"B ";
     }
     else if(boat.size == 3){
@@ -150,7 +152,7 @@ void printArmada(Boat boat){
     */
 
 void printSub(Subm sub){
-    ofstream file("armada.txt", ios::app);
+    ofstream file("output/armada.txt", ios::app);
     file<<"S "<<sub.posX<<" "<<sub.posY<<endl;
     file.close();
 }

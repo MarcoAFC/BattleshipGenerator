@@ -1,4 +1,4 @@
-#include "rdtsc.h"
+#include "../include/rdtsc.h"
 #ifdef _WIN32
 
 //  Windows

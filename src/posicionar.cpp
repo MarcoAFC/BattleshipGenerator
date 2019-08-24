@@ -1,5 +1,5 @@
-#include "posicionar.h"
-#include "print.h"
+#include "../include/posicionar.h"
+#include "../include/print.h"
 using namespace std;
 
     /*!

@@ -1,7 +1,7 @@
-#include "posicionar.h"
-#include "encontrarpos.h"
-#include "print.h"
-#include "rdtsc.h"
+#include "../include/posicionar.h"
+#include "../include/encontrarpos.h"
+#include "../include/print.h"
+#include "../include/rdtsc.h"
 
 using namespace std;
 

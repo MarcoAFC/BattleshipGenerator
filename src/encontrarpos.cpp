@@ -1,5 +1,4 @@
-#include "encontrarpos.h"
-
+#include "../include/encontrarpos.h"
     /*!
      * Generates random positions in the matrix to find a pplace suitable for the submarine,
      * keeps running until one is found, then calls posicionarSub() to place the submarine.
