@@ -10,6 +10,8 @@
   - Destroyer, size 3 boat, 2.
   - Cruiser, size 2 boat, 3.
   - Submarine, size 1 boat, 4.
+  
+  The objective, for the player, is to find out where the ships are spreaded in the board based on minimal information given by the program regarding to a few boats placings, such as some empty tiles, some boat tiles and the number of boat pieces in any given row or column. When the player correctly marks the position of all boats, the game is won.
    
 ## Usage
   To download and use this program, please clone the repository to your environment, then open the terminal in the corresponding file and use the command **Make**.\
