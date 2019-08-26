@@ -2,7 +2,7 @@
 ## Authors
 
  - [Marco Antonio](github.com/MarcoAFC)
- - Leonardo Nammur
+ - [Leonardo Nammur](github.com/Nammur)
 ## About the project
   This is an exercise project made for the course DIM0120 and has the objective of generating random [**Battleship**](https://en.wikipedia.org/wiki/Battleship_(puzzle)) puzzles, with varying m x n dimensions according to user input, in which several different sized boats are placed in a one-sided naval war game. The boats sizes and quantities are as follow:
   
