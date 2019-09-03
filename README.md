@@ -28,7 +28,7 @@
     **Required parameter:**\
        - Number of puzzles:\
          Allows the user to set the number of puzzles to be generated, and **must** be in the range[1,100] and any value  
-        smaller or higher than that will not be allowed. Can't be ignored and the program will not run unless given.\
+        smaller or higher than that will not be allowed. Can't be ignored and the program will not run unless given.
          
 ## Limitations
   When generating smaller tables, specially if the number of rows and/or columns is smaller than 9, generation *may* occur slowly due to the incapacity of finding appropriate placings for the boats. The program will keep running until the suitable tables are generated. On 7x7 tables this will **most likely** take a while. If using the terminal and the program gets stuck, use Ctrl+C to finish the execution. Any table that had already been filled will be safely stored.
